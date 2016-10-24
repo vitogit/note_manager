@@ -9,10 +9,11 @@
   </li>
   
   <% @notes.each do |note| %>
-    <li>
+    <li id="note_<%=note.id%>">
       <%= note.text %> 
       <span class="actions"> 
         <%= link_to 'Destroy', note, method: :delete, data: { confirm: 'Are you sure?' } %>
+        <%= link_to 'Add children', add_children_path(note), remote: true %>  
       </span>
     </li>
   <% end %>
