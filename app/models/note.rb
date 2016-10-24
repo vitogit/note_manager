@@ -7,4 +7,9 @@ class Note < ApplicationRecord
   def toggle_complete
     self.completed = !completed
   end
+  
+  #tags can be a single string tag, or an array
+  def self.search_by_tag (tags)
+    Note.tagged_with(tags)
+  end
 end

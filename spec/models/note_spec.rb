@@ -28,7 +28,35 @@ RSpec.describe Note, type: :model do
   
   it "has tags" do
     note = Note.create(text: "root")
-    note.tag_list.add("tag1") 
+    note.tag_list.add("tag1")
     expect(note.tag_list.size).to equal(1)
-  end    
+  end
+  
+  context "search_by_tag" do
+    it "filter notes by a single tag" do
+      note1 = Note.create(text: "n1")
+      note1.tag_list.add("tag1", "tag2")
+      note2 = Note.create(text: "n2")
+      note2.tag_list.add("tag1", "tag3")
+      note1.save
+      note2.save
+
+      expect(Note.search_by_tag("tag1").size).to eq(2)
+      expect(Note.search_by_tag("tag3").size).to eq(1)
+      expect(Note.search_by_tag("tag4").size).to eq(0)
+    end
+    
+    it "filter notes by an array of tags" do
+      note1 = Note.create(text: "n1")
+      note1.tag_list.add("tag1", "tag2")
+      note2 = Note.create(text: "n2")
+      note2.tag_list.add("tag1", "tag3")
+      note1.save
+      note2.save
+      
+      expect(Note.search_by_tag(["tag1"]).size).to equal(2)
+      expect(Note.search_by_tag(["tag1", "tag2"]).size).to equal(1)
+      expect(Note.search_by_tag(["tag3", "tag4"]).size).to equal(0)
+    end
+  end
 end
