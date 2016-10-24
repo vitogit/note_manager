@@ -25,4 +25,10 @@ RSpec.describe Note, type: :model do
     note.toggle_complete
     expect(note.completed).to equal(false)
   end  
+  
+  it "has tags" do
+    note = Note.create(text: "root")
+    note.tag_list.add("tag1") 
+    expect(note.tag_list.size).to equal(1)
+  end    
 end
