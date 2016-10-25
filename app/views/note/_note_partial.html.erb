@@ -5,4 +5,9 @@
     <%= link_to 'Add children', add_children_path(note), remote: true %>
     <%= link_to 'Complete', toggle_complete_path(note), remote: true %>
   </span>
+  <div class="children">
+    <% note.children.each do |note_child| %>
+      <%= render :partial => "note_partial", :locals => { note: note_child  } %>
+    <% end %>
+  </div>
 </div>

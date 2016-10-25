@@ -201,7 +201,7 @@ PLATFORMS
 
 DEPENDENCIES
   acts-as-taggable-on (~> 4.0)
-  acts_as_tree (~> 2.4)
+  acts_as_tree (~> 2.6)
   byebug
   guard-rspec
   jbuilder (~> 2.5)

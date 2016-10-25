@@ -10,7 +10,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'jquery-rails'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
-gem 'acts_as_tree', '~> 2.4'
+gem 'acts_as_tree', '~> 2.6'
 gem 'acts-as-taggable-on', '~> 4.0'
 
 group :development, :test do

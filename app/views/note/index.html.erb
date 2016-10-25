@@ -1,5 +1,4 @@
 <h1>Note Manager</h1>
 
-<% @notes.each do |note| %>
-  <%= render :partial => "note_partial", :locals => { note: note  } %>
-<% end %>
+<%= render :partial => "note_partial", :locals => { note: @root  } %>
+  

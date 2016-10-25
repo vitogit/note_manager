@@ -2,8 +2,7 @@ class NoteController < ApplicationController
    before_action :set_note, only: [:show, :edit, :update, :destroy, :add_children, :toggle_complete]
   
   def index
-    @notes = Note.all
-    @notes = [Note.create(text:'root')] if @notes.empty?
+    @root = Note.first || Note.create(text:'root')
   end
 
   # DELETE /notes/1.json
