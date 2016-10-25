@@ -1,0 +1,3 @@
+var id = <%= @note.id %>
+var completed = <%= @note.completed %>
+$('#note_'+id).find('.content').prop('contenteditable',completed).toggleClass('completed')

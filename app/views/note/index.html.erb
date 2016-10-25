@@ -10,10 +10,11 @@
   
   <% @notes.each do |note| %>
     <li id="note_<%=note.id%>">
-      <%= note.text %> 
+      <div class="content" contenteditable="true"><%= note.text %></div>
       <span class="actions"> 
         <%= link_to 'Destroy', note, method: :delete, data: { confirm: 'Are you sure?' } %>
-        <%= link_to 'Add children', add_children_path(note), remote: true %>  
+        <%= link_to 'Add children', add_children_path(note), remote: true %>
+        <%= link_to 'Complete', toggle_complete_path(note), remote: true %>
       </span>
     </li>
   <% end %>

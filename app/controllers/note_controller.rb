@@ -1,5 +1,5 @@
 class NoteController < ApplicationController
-   before_action :set_note, only: [:show, :edit, :update, :destroy, :add_children]
+   before_action :set_note, only: [:show, :edit, :update, :destroy, :add_children, :toggle_complete]
   
   def index
     @notes = Note.all
@@ -46,13 +46,18 @@ class NoteController < ApplicationController
   end
   
   def add_children
-    puts ("add children________")
-    puts ("@note________")+@note.to_json
     respond_to do |format|
       format.js #add_question.js.erb
     end
   end
 
+  def toggle_complete
+    @note.toggle_complete
+    respond_to do |format|
+      format.js
+    end
+  end
+  
    private
    
    def set_note
