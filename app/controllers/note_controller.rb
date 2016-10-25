@@ -27,6 +27,15 @@ class NoteController < ApplicationController
     end
   end
   
+  def update
+    if @note.update_attributes(note_params)
+      # Handle a successful update.
+    else
+      flash[:danger] = @note.errors.full_messages
+      render :root 
+    end
+  end  
+  
    private
    
    def set_note
@@ -34,6 +43,6 @@ class NoteController < ApplicationController
    end
    
    def note_params
-      params.require(:note).permit(:name, :completed)
+      params.require(:note).permit(:text, :completed)
    end  
 end
