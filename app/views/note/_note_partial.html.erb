@@ -1,7 +1,7 @@
 <div id="note_<%=note.id%>">
   <span class="content" contenteditable="true"><%= note.text %></span>
   <span class="actions"> 
-    <%= link_to 'Destroy', note, method: :delete, data: { confirm: 'Are you sure?' } %>
+    <%= link_to 'Destroy', note, method: :delete, data: { confirm: 'Are you sure?' }, remote: true %>
     <%= link_to 'Add children', add_children_path(note), remote: true %>
     <%= link_to 'Complete', toggle_complete_path(note), remote: true %>
   </span>

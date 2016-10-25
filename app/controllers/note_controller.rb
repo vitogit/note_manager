@@ -5,11 +5,10 @@ class NoteController < ApplicationController
     @root = Note.first || Note.create(text:'root')
   end
 
-  # DELETE /notes/1.json
   def destroy
     @note.destroy
-       respond_to do |format|
-       format.json { head :no_content }
+    respond_to do |format|
+       format.js
     end
   end
   

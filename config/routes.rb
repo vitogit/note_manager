@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   
   get 'add_children/:id', to: 'note#add_children', as: 'add_children'
   get 'toggle_complete/:id', to: 'note#toggle_complete', as: 'toggle_complete'
+  delete 'destroy/:id', to: 'note#destroy', as: 'destroy'
 
   
 end
