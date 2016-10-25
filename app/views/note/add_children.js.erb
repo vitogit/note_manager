@@ -1,2 +1,2 @@
-var id = <%= @note.id %>
-$('#note_'+id).append('<div>hello</div><%=j render partial: "note_partial" %>')
+var parent_id = <%= @parent_note.id %>
+$('#note_'+parent_id).append("<%=j render(partial: 'note_partial', locals:{ note: @child_note })%>")

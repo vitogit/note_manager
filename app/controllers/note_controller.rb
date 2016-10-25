@@ -3,7 +3,7 @@ class NoteController < ApplicationController
   
   def index
     @notes = Note.all
-    @note_root = Note.new(text: 'root')
+    @notes = [Note.create(text:'root')] if @notes.empty?
   end
 
   # # POST /notes
@@ -46,8 +46,10 @@ class NoteController < ApplicationController
   end
   
   def add_children
+    @parent_note = @note
+    @child_note = @parent_note.children.create(text: "child1")
     respond_to do |format|
-      format.js #add_question.js.erb
+      format.js 
     end
   end
 
