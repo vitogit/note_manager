@@ -1,2 +1,2 @@
 var parent_id = <%= @parent_note.id %>
-$('#note_'+parent_id).find('.children').append("<%=j render(partial: 'note_partial', locals:{ note: @child_note })%>")
+$('#note_'+parent_id).children('.children').append("<%=j render(partial: 'note_partial', locals:{ note: @child_note })%>")
