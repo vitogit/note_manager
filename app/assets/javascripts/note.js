@@ -7,4 +7,11 @@ $(function() {
     var currentText = $(this).html()
     $('.content').parent().find('.hidden_text').val(currentText)
   })
+
+  $(".note").mouseover(function(e) {
+    $(this).children('.actions').show();
+    e.stopPropagation();
+  }).mouseout(function(e) {
+    $(this).children('.actions').hide();
+  })
 });
