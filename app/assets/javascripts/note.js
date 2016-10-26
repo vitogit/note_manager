@@ -8,10 +8,14 @@ $(function() {
     $('.content').parent().find('.hidden_text').val(currentText)
   })
 
-  $(".note").mouseover(function(e) {
+  $("#main").on('mouseover', '.note',  function(e) {
     $(this).children('.actions').show();
     e.stopPropagation();
-  }).mouseout(function(e) {
-    $(this).children('.actions').hide();
   })
+
+  $("#main").on('mouseout', '.note', function(e) {
+    $(this).children('.actions').hide();
+  })  
+  
+
 });
