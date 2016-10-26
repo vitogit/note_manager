@@ -1,5 +1,5 @@
 class NoteController < ApplicationController
-   before_action :set_note, only: [:show, :edit, :update, :destroy, :add_children, :toggle_complete]
+   before_action :set_note, only: [:show, :edit, :update, :destroy, :add_children,:add_sibling, :toggle_complete]
   
   def index
     @root = Note.first || Note.create(text:'root')
@@ -20,6 +20,16 @@ class NoteController < ApplicationController
     end
   end
 
+  def add_sibling
+    if @note.parent
+      @parent_note = @note.parent
+      @sibling_note = @parent_note.children.create(text: "sibling1")
+    end
+    respond_to do |format|
+      format.js 
+    end
+  end
+  
   def toggle_complete
     @note.toggle_complete
     @note.save
