@@ -22,6 +22,7 @@ class NoteController < ApplicationController
 
   def toggle_complete
     @note.toggle_complete
+    @note.save
     respond_to do |format|
       format.js
     end

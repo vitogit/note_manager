@@ -1,6 +1,6 @@
 <div id="note_<%=note.id%>" class="note">
   <!-- There is js code in note.js to automatically send text from conteneditable to the hidden field -->
-  <span class="content" contenteditable="true"><%= note.text %></span>
+  <span class="content <%='completed' if note.completed%>" contenteditable="true"><%= note.text %></span>
   <span class="actions"> 
     <%= form_for note, method: "patch", remote: true do |f| %>
       <%= f.hidden_field :text, value: note.text, class: "hidden_text" %>
