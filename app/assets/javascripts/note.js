@@ -8,12 +8,12 @@ $(function() {
     $('.content').parent().find('.hidden_text').val(currentText)
   })
 
-  $("#main").on('mouseover', '.note',  function(e) {
+  $("#main").on('mouseover', '.note .row',  function(e) {
     $(this).children('.actions').show();
     e.stopPropagation();
   })
 
-  $("#main").on('mouseout', '.note', function(e) {
+  $("#main").on('mouseout', '.note .row', function(e) {
     $(this).children('.actions').hide();
   })  
   

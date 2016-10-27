@@ -1,0 +1,7 @@
+@import "styles/_variables";
+
+// Custom bootstrap variables must be set or imported before bootstrap itself.
+@import "bootstrap";
+@import "styles/_bootswatch";
+
+@import "note";
