@@ -5,11 +5,6 @@ RSpec.describe Note, type: :model do
     expect(Note.new(text: 'hello')).to be_valid
   end
 
-  it "is not valid without text" do
-    note = Note.new(text: nil)
-    expect(note).to_not be_valid
-  end
-
   it "is a tree" do
     root      = Note.create(text: "root")
     child1    = root.children.create(text: "child1")

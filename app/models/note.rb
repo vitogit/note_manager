@@ -2,7 +2,6 @@ class Note < ApplicationRecord
   acts_as_tree
   acts_as_taggable
   before_save :parse_add_tags
-  validates :text, presence: true
 
   def toggle_complete
     self.completed = !completed

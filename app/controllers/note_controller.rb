@@ -5,7 +5,7 @@ class NoteController < ApplicationController
     @root = Note.first
     if @root.nil?
       @root=  Note.create(text:'root')
-      @root.children.create(text:'Write me...')
+      @root.children.create(text:'')
     end
   end
 
@@ -18,7 +18,7 @@ class NoteController < ApplicationController
   
   def add_children
     @parent_note = @note
-    @child_note = @parent_note.children.create(text: "Write me")
+    @child_note = @parent_note.children.create(text: "")
     respond_to do |format|
       format.js 
     end
@@ -27,7 +27,7 @@ class NoteController < ApplicationController
   def add_sibling
     if @note.parent
       @parent_note = @note.parent
-      @sibling_note = @parent_note.children.create(text: "Write me")
+      @sibling_note = @parent_note.children.create(text: "")
     end
     respond_to do |format|
       format.js 

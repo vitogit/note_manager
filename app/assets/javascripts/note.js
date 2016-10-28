@@ -1,7 +1,7 @@
 $(function() {
-
+  
   //update hidden field while writing to allow update note
-  $('.content').keydown(function(event){
+  $("#main").on('keydown', '.content',  function(e) {
     var continue_keys_output = handleKeyPress(event, this);
     if (continue_keys_output) {
       var currentText = $(this).html()
@@ -9,7 +9,8 @@ $(function() {
     }
     return continue_keys_output
   })
-
+  
+  
   $("#main").on('mouseover', '.note .row',  function(e) {
     $(this).children('.actions').show();
     e.stopPropagation();
