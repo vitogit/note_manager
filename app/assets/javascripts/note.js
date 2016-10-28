@@ -1,11 +1,9 @@
-// Place all the behaviors and hooks related to the matching controller here.
-// All this logic will automatically be available in application.js.
 $(function() {
-  
+
   //update hidden field while writing to allow update note
   $('.content').keyup(function(event){
     var currentText = $(this).html()
-    $('.content').parent().find('.hidden_text').val(currentText)
+    $(this).parent().parent().find('.hidden_text').val(currentText)
   })
 
   $("#main").on('mouseover', '.note .row',  function(e) {
@@ -15,7 +13,19 @@ $(function() {
 
   $("#main").on('mouseout', '.note .row', function(e) {
     $(this).children('.actions').hide();
-  })  
-  
+  })
 
+  $('#searcher').keyup(function(event){
+    var currentText = $(this).val()
+    $( ".note" ).each(function( index ) {
+      var content = $(this).find('.content').html()
+      if (content && content.indexOf(currentText) >= 0) {
+        $(this).show()
+        $(this).parents().show()
+      } else {
+        $(this).hide()
+      }
+    });
+  })
+  
 });

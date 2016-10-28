@@ -2,23 +2,19 @@
   header
 </header>
 
-
 <div class="container">
   <div "container-header">
     <h1>Note Manager</h1>
   </div>
   <div class="row">
-    <div class="col-sm-2 menu" style="background-color:blue"> 
+    <div class="col-sm-2 menu" style="background-color:blue">
     </div>
     <div id="main" class="col-sm-10 main">
+      <div class="search_bar form-group">
+        <input id="searcher" type="text" class="form-control" placeholder="filter by tag">
+      </div>
       <%= render :partial => "note_partial", :locals => { note: @root  } %>
     </div>
   </div>
 
 </div>
-
-<footer style="background-color:blue">
-  footer
-</footer>
-
-  

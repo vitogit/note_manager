@@ -1,14 +1,14 @@
 <div id="note_<%=note.id%>" class="note">
-  <div class="row">
+  <div class="row note_line">
     <div class="col-sm-6">
       <!-- There is js code in note.js to automatically send text from conteneditable to the hidden field -->
       <div class="form-control content  <%='completed' if note.completed%>" contenteditable="true"><%= note.text %></div>
     </div>
-    <div class="actions col-sm-6"> 
+    <div class="actions col-sm-6">
       <%= form_for note, method: "patch", remote: true do |f| %>
         <%= f.hidden_field :text, value: note.text, class: "hidden_text" %>
         <%= f.submit 'Update' %>
-      <% end %>      
+      <% end %>
       <%= link_to 'Destroy', note, method: :delete, data: { confirm: 'Are you sure?' }, remote: true %>
       <%= link_to 'Add children', add_children_path(note), remote: true %>
       <%= link_to 'Add sibling', add_sibling_path(note), remote: true %>
