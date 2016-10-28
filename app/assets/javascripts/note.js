@@ -27,5 +27,13 @@ $(function() {
       }
     });
   })
+
+  $("#container").on('click', '.tag_link', function(e) {
+    var tag_name = $(this).text();
+    $('#searcher').val(tag_name);
+    $('#searcher').keyup();
+    return false
+  })
+  
   
 });

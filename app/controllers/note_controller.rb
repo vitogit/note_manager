@@ -47,6 +47,10 @@ class NoteController < ApplicationController
     end
   end  
   
+  def reload_tag_list
+    render :partial => "tag_list"
+  end
+  
    private
    
    def set_note
