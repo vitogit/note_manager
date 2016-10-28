@@ -35,5 +35,11 @@ $(function() {
     return false
   })
   
+  $("#container").on('click', '.tag_link_reset', function(e) {
+    $('#searcher').val("");
+    $('#searcher').keyup();
+    return false
+  })
+  
   
 });
