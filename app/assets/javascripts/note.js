@@ -10,6 +10,9 @@ $(function() {
       $(this).parent().parent().find('.hidden_text').val(currentText)
   })
 
+  $("#main").on('blur', '.content',  function(event) {
+      updateNote(this)
+  })
 
   $("#main").on('mouseover', '.note .row',  function(e) {
     $(this).children('.actions').show();
@@ -60,18 +63,21 @@ $(function() {
     if (keyCode == '13'){
       // Enter pressed, add sibling
       $(el).parent().parent().find('.add_sibling_action').click()
+      updateNote(el)
       return false
     }
     if (shiftKey && keyCode == '9'){
       console.log('shiftab')
       // Shift+Tab pressed, convert to sibling
       e.preventDefault()
+      updateNote(el)
       setUpperSibling($(el).parents('.note'))
       return false
     }
 
     if (keyCode == '9'){
       console.log('tab')
+      updateNote(el)
 
       // Tab pressed, convert to children
       e.preventDefault()
@@ -82,6 +88,7 @@ $(function() {
 
     if (keyCode == '40'){
       // down arrow pressed, move down
+      updateNote(el)
       e.preventDefault()
       //self.moveDown(e)
       return false
@@ -94,16 +101,14 @@ $(function() {
     var parent_id = current_note.prev().data('id')
 
     $.get('/note/'+current_id+'/change_parent/'+parent_id);
-    reload_main();
   }
 
   function setUpperSibling(current_note) {
     var current_id = current_note.data('id')
     $.get('/note/'+current_id+'/change_to_sibling');
-    reload_main();
   }
 
-  function reload_main() {
-
+  function updateNote(el) {
+    $(el).parent().parent().find('.update_action').click()
   }
 });
