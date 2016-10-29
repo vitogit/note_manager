@@ -7,6 +7,7 @@ $(function() {
   //update hidden field while writing to allow update note
   $("#main").on('keyup', '.content',  function(event) {
       var currentText = $(this).html()
+      console.log(currentText)
       $(this).parent().parent().find('.hidden_text').val(currentText)
   })
 
@@ -23,24 +24,18 @@ $(function() {
     $(this).children('.actions').hide();
   })
 
-  $('#searcher').keyup(function(event){
-    var currentText = $(this).val()
-    $( ".note" ).each(function( index ) {
-      var content = $(this).find('.content').html()
-      if (content && content.indexOf(currentText) >= 0) {
-        $(this).show()
-        $(this).parents().show()
-      } else {
-        $(this).hide()
-      }
-    });
-  })
+  //handle letters(keyup) and delete(keydown)
+  $('#searcher').on('keydown keyup', function(e) {
+    handleSearch(this)
+  });
 
   $("#container").on('click', '.tag_link', function(e) {
+    e.preventDefault()
     search_tag($(this).text());
   })
 
   $("#container").on('click', '.tag_link_reset', function(e) {
+    e.preventDefault()
     reset_filters() ;
   })
 
@@ -50,7 +45,7 @@ $(function() {
     return false
   }
 
-  function search_filter(tag_name) {
+  function search_tag(tag_name) {
     $('#searcher').val(tag_name);
     $('#searcher').keyup();
     return false
@@ -93,7 +88,7 @@ $(function() {
       //self.moveDown(e)
       return false
     }
-    return true
+
   }
 
   function setUpperParent(current_note) {
@@ -110,5 +105,26 @@ $(function() {
 
   function updateNote(el) {
     $(el).parent().parent().find('.update_action').click()
+  }
+
+  function moveDown(el) {
+    $(el).parents('.note').next().find('.content').focus()
+  }
+
+  function moveUp(el) {
+    $(el).parents('.note').prev().find('.content').focus()
+  }
+
+  function handleSearch(el) {
+    var currentText = $(el).val()
+    $( ".note" ).each(function( index ) {
+      var content = $(this).find('.content').html()
+      if (content && content.indexOf(currentText) >= 0) {
+        $(this).show()
+        $(this).parents().show()
+      } else {
+        $(this).hide()
+      }
+    });
   }
 });
