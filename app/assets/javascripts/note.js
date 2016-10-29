@@ -1,7 +1,7 @@
 $(function() {
-  
+
   //update hidden field while writing to allow update note
-  $("#main").on('keydown', '.content',  function(e) {
+  $("#main").on('keydown', '.content',  function(event) {
     var continue_keys_output = handleKeyPress(event, this);
     if (continue_keys_output) {
       var currentText = $(this).html()
@@ -9,8 +9,8 @@ $(function() {
     }
     return continue_keys_output
   })
-  
-  
+
+
   $("#main").on('mouseover', '.note .row',  function(e) {
     $(this).children('.actions').show();
     e.stopPropagation();
@@ -36,23 +36,23 @@ $(function() {
   $("#container").on('click', '.tag_link', function(e) {
     search_tag($(this).text());
   })
-  
+
   $("#container").on('click', '.tag_link_reset', function(e) {
     reset_filters() ;
   })
-  
+
   function reset_filters() {
     $('#searcher').val("");
     $('#searcher').keyup();
     return false
   }
-  
+
   function search_filter(tag_name) {
     $('#searcher').val(tag_name);
     $('#searcher').keyup();
     return false
   }
-  
+
   function handleKeyPress(e, el) {
     var keyCode = e.keyCode || e.which;
     if (keyCode == '13'){
@@ -64,15 +64,29 @@ $(function() {
     if (keyCode == '9'){
       // Tab pressed, convert to children
       e.preventDefault()
+      setUpperParent($(el).parents('.note'))
       return false
-    }   
+    }
     if (keyCode == '40'){
       // down arrow pressed, move down
       e.preventDefault()
       //self.moveDown(e)
       return false
-    }      
+    }
     return true
-  }  
-  
+  }
+
+  function setUpperParent(current_note) {
+    var current_id = current_note.data('id')
+    console.log(current_id)
+    var parent_id = current_note.prev().data('id')
+    console.log(parent_id)
+
+    $.get('/note/'+current_id+'/change_parent/'+parent_id);
+    reload_main();
+  }
+
+  function reload_main() {
+
+  }
 });

@@ -3,6 +3,11 @@ class Note < ApplicationRecord
   acts_as_taggable
   before_save :parse_add_tags
 
+  def set_parent new_parent_id
+    self.parent_id = new_parent_id
+    self.save
+  end
+
   def toggle_complete
     self.completed = !completed
   end

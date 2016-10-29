@@ -27,6 +27,14 @@ RSpec.describe Note, type: :model do
     expect(note.tag_list.size).to equal(1)
   end
 
+  it "change note parent" do
+    root = Note.create(text: "root")
+    child1 = root.children.create(text: "child1")
+    child2 = root.children.create(text: "child2")
+    child2.set_parent(child1.id)
+    expect(child2.parent_id).to equal(child1.id)
+  end
+
   context "search_by_tag" do
     it "filter notes by a single tag" do
       note1 = Note.create(text: "n1")
@@ -63,6 +71,5 @@ RSpec.describe Note, type: :model do
       expect(Note.search_by_tag("#tag_1").size).to eq(1)
       expect(Note.search_by_tag("#tag_2").size).to eq(1)
     end
-
   end
 end

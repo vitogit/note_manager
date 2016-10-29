@@ -1,4 +1,4 @@
-<div id="note_<%=note.id%>" class="note" >
+<div id="note_<%=note.id%>" class="note" data-id="<%=note.id%>">
   <!-- hide the root note -->
   <div class="row note_line" style="display:<%='none' if note.parent.nil?%>">
     <div class="col-sm-6">

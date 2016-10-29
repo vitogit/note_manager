@@ -1,12 +1,8 @@
 class NoteController < ApplicationController
-   before_action :set_note, only: [:show, :edit, :update, :destroy, :add_children,:add_sibling, :toggle_complete]
-  
+   before_action :set_note, only: [:show, :edit, :update, :destroy, :change_parent, :add_children,:add_sibling, :toggle_complete]
+
   def index
-    @root = Note.first
-    if @root.nil?
-      @root=  Note.create(text:'root')
-      @root.children.create(text:'')
-    end
+    init
   end
 
   def destroy
@@ -15,12 +11,12 @@ class NoteController < ApplicationController
        format.js
     end
   end
-  
+
   def add_children
     @parent_note = @note
     @child_note = @parent_note.children.create(text: "")
     respond_to do |format|
-      format.js 
+      format.js
     end
   end
 
@@ -30,10 +26,14 @@ class NoteController < ApplicationController
       @sibling_note = @parent_note.children.create(text: "")
     end
     respond_to do |format|
-      format.js 
+      format.js
     end
   end
-  
+
+  def change_parent
+    @note.set_parent params[:parent_id]
+  end
+
   def toggle_complete
     @note.toggle_complete
     @note.save
@@ -41,27 +41,41 @@ class NoteController < ApplicationController
       format.js
     end
   end
-  
+
   def update
     if @note.update_attributes(note_params)
       # Handle a successful update.
     else
       flash[:danger] = @note.errors.full_messages
-      render :root 
+      render :root
     end
-  end  
-  
+  end
+
   def reload_tag_list
     render :partial => "tag_list"
   end
-  
+
+  def reload_main_notes
+    init
+    render :partial => "note_partial", :locals => { note: @root  } 
+  end
+
+
    private
-   
+
    def set_note
       @note = Note.find(params[:id])
    end
-   
+
    def note_params
       params.require(:note).permit(:text, :completed)
-   end  
+   end
+
+   def init
+     @root = Note.first
+     if @root.nil?
+       @root=  Note.create(text:'root')
+       @root.children.create(text:'')
+     end
+   end
 end
