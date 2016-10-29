@@ -1,0 +1,4 @@
+$( "#main_notes" ).load( "reload_main_notes", function() {
+  var id = <%= @note.id %>
+  $('#note_'+id).find('.content').focus()
+});

@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :note do
     member do
       get 'change_parent/:parent_id', to: 'note#change_parent', as: 'change_parent'
+      get 'change_to_sibling', to: 'note#change_to_sibling', as: 'change_to_sibling'
     end
   end
 

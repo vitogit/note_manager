@@ -1,5 +1,5 @@
 class NoteController < ApplicationController
-   before_action :set_note, only: [:show, :edit, :update, :destroy, :change_parent, :add_children,:add_sibling, :toggle_complete]
+   before_action :set_note, only: [:show, :edit, :update, :destroy, :change_to_sibling, :change_parent, :add_children,:add_sibling, :toggle_complete]
 
   def index
     init
@@ -34,6 +34,11 @@ class NoteController < ApplicationController
     @note.set_parent params[:parent_id]
   end
 
+  def change_to_sibling
+    gradpa = @note.parent().parent()
+    @note.set_parent gradpa.id
+  end
+
   def toggle_complete
     @note.toggle_complete
     @note.save
@@ -57,7 +62,7 @@ class NoteController < ApplicationController
 
   def reload_main_notes
     init
-    render :partial => "note_partial", :locals => { note: @root  } 
+    render :partial => "note_partial", :locals => { note: @root  }
   end
 
 

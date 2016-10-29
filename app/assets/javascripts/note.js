@@ -1,13 +1,13 @@
 $(function() {
 
-  //update hidden field while writing to allow update note
   $("#main").on('keydown', '.content',  function(event) {
-    var continue_keys_output = handleKeyPress(event, this);
-    if (continue_keys_output) {
+    return handleKeyPress(event, this);
+  })
+
+  //update hidden field while writing to allow update note
+  $("#main").on('keyup', '.content',  function(event) {
       var currentText = $(this).html()
       $(this).parent().parent().find('.hidden_text').val(currentText)
-    }
-    return continue_keys_output
   })
 
 
@@ -55,18 +55,31 @@ $(function() {
 
   function handleKeyPress(e, el) {
     var keyCode = e.keyCode || e.which;
+    var shiftKey = e.shiftKey;
+
     if (keyCode == '13'){
-      console.log(el)
       // Enter pressed, add sibling
       $(el).parent().parent().find('.add_sibling_action').click()
       return false
     }
+    if (shiftKey && keyCode == '9'){
+      console.log('shiftab')
+      // Shift+Tab pressed, convert to sibling
+      e.preventDefault()
+      setUpperSibling($(el).parents('.note'))
+      return false
+    }
+
     if (keyCode == '9'){
+      console.log('tab')
+
       // Tab pressed, convert to children
       e.preventDefault()
       setUpperParent($(el).parents('.note'))
       return false
     }
+
+
     if (keyCode == '40'){
       // down arrow pressed, move down
       e.preventDefault()
@@ -78,11 +91,15 @@ $(function() {
 
   function setUpperParent(current_note) {
     var current_id = current_note.data('id')
-    console.log(current_id)
     var parent_id = current_note.prev().data('id')
-    console.log(parent_id)
 
     $.get('/note/'+current_id+'/change_parent/'+parent_id);
+    reload_main();
+  }
+
+  function setUpperSibling(current_note) {
+    var current_id = current_note.data('id')
+    $.get('/note/'+current_id+'/change_to_sibling');
     reload_main();
   }
 
