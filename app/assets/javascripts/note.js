@@ -6,13 +6,12 @@ $(function() {
 
   //update hidden field while writing to allow update note
   $("#main").on('keyup', '.content',  function(event) {
-      var currentText = $(this).html()
-      console.log(currentText)
-      $(this).parent().parent().find('.hidden_text').val(currentText)
+    var currentText = $(this).text().trim()
+    $(this).parent().parent().find('.hidden_text').val(currentText)
   })
 
   $("#main").on('blur', '.content',  function(event) {
-      updateNote(this)
+    updateNote(this)
   })
 
   $("#main").on('mouseover', '.note .row',  function(e) {
@@ -54,7 +53,6 @@ $(function() {
   function handleKeyPress(e, el) {
     var keyCode = e.keyCode || e.which;
     var shiftKey = e.shiftKey;
-
     if (keyCode == '13'){
       // Enter pressed, add sibling
       $(el).parent().parent().find('.add_sibling_action').click()
@@ -62,7 +60,6 @@ $(function() {
       return false
     }
     if (shiftKey && keyCode == '9'){
-      console.log('shiftab')
       // Shift+Tab pressed, convert to sibling
       e.preventDefault()
       updateNote(el)
@@ -71,24 +68,26 @@ $(function() {
     }
 
     if (keyCode == '9'){
-      console.log('tab')
       updateNote(el)
-
       // Tab pressed, convert to children
       e.preventDefault()
       setUpperParent($(el).parents('.note'))
       return false
     }
 
-
-    if (keyCode == '40'){
-      // down arrow pressed, move down
-      updateNote(el)
+    if (keyCode == '38'){
+      // up arrow pressed, move up
       e.preventDefault()
-      //self.moveDown(e)
+      moveUp(el);
       return false
     }
-
+    
+    if (keyCode == '40'){
+      // down arrow pressed, move down
+      e.preventDefault()
+      moveDown(el)
+      return false
+    }
   }
 
   function setUpperParent(current_note) {
@@ -108,17 +107,29 @@ $(function() {
   }
 
   function moveDown(el) {
-    $(el).parents('.note').next().find('.content').focus()
+    var current_note = $(el).closest('.note').first();
+    var next_note = current_note.next()
+    if (next_note.length) {
+      next_note.find('.content').first().focus();
+    } else {
+      current_note.find('.note').first().find('.content').first().focus()
+    }
   }
 
   function moveUp(el) {
-    $(el).parents('.note').prev().find('.content').focus()
+    var current_note = $(el).closest('.note').first();
+    var prev_note = current_note.prev()
+    if (prev_note.length) {
+      prev_note.find('.content').first().focus();
+    } else {
+      current_note.parents('.note').first().find('.content').first().focus()
+    }
   }
 
   function handleSearch(el) {
     var currentText = $(el).val()
     $( ".note" ).each(function( index ) {
-      var content = $(this).find('.content').html()
+      var content = $(this).find('.content').text()
       if (content && content.indexOf(currentText) >= 0) {
         $(this).show()
         $(this).parents().show()

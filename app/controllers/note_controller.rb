@@ -31,12 +31,12 @@ class NoteController < ApplicationController
   end
 
   def change_parent
-    @note.set_parent params[:parent_id]
+    @note.set_parent params[:parent_id] if is_integer? params[:parent_id]
   end
 
   def change_to_sibling
-    gradpa = @note.parent().parent()
-    @note.set_parent gradpa.id
+    grandpa = @note.parent().parent()
+    @note.set_parent grandpa.id if grandpa
   end
 
   def toggle_complete
@@ -83,4 +83,8 @@ class NoteController < ApplicationController
        @root.children.create(text:'')
      end
    end
+   
+  def is_integer? (number)
+    number.to_i.to_s == number
+  end   
 end
