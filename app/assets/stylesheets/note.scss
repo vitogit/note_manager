@@ -12,6 +12,7 @@
 
 .actions {
   display:none;
+  font-size: 10px;
 }
 
 .note_line {
@@ -20,4 +21,23 @@
 
 .note_line .content {
   box-shadow: none;
+}
+
+.bullet_point {
+  height: 30px;
+}
+.content {
+  display: inline-block;
+  width: 90%;
+  padding:1px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  height: 25px;  
+}
+
+.content:hover, .content:focus {
+  border: 1px solid #ddd;
+  border-color: #66afe9;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(102, 175, 233, 0.6);
+  outline: 0 none;  
 }

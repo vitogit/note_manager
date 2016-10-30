@@ -4,12 +4,6 @@ $(function() {
     return handleKeyPress(event, this);
   })
 
-  //update hidden field while writing to allow update note
-  $("#main").on('keyup', '.content',  function(event) {
-    var currentText = $(this).text().trim()
-    $(this).parent().parent().find('.hidden_text').val(currentText)
-  })
-
   $("#main").on('blur', '.content',  function(event) {
     updateNote(this)
   })
@@ -111,7 +105,12 @@ $(function() {
   }
 
   function updateNote(el) {
-    $(el).parent().parent().find('.update_action').click()
+    var note_id = $(el).closest('.note').data('id')
+    var note_text = $(el).text()
+    $.post({
+      url: '/note/'+note_id,
+      data: { _method:'PATCH', note: {id:note_id, text: note_text} }
+    });    
   }
   
   function destroyNote(el) {
