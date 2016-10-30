@@ -6,7 +6,6 @@
       <span class=" content  <%='completed' if note.completed%>" contenteditable="true"><%= note.text %></span>
     </div>
     <div class="actions col-sm-6">
-
       <%= link_to 'Destroy', note, method: :delete, data: { confirm: 'Are you sure?' }, remote: true, class: 'destroy_action' %>
       <%= link_to 'Add children', add_children_path(note), remote: true, class: 'add_children_action hidden' %>
       <%= link_to 'Add sibling', add_sibling_path(note), remote: true, class: 'add_sibling_action hidden' %>
