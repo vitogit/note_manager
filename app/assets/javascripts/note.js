@@ -53,12 +53,20 @@ $(function() {
   function handleKeyPress(e, el) {
     var keyCode = e.keyCode || e.which;
     var shiftKey = e.shiftKey;
+    console.log("keyCode________"+keyCode)
     if (keyCode == '13'){
       // Enter pressed, add sibling
       $(el).parent().parent().find('.add_sibling_action').click()
       updateNote(el)
       return false
     }
+
+    if ($(el).text()=="" && keyCode == '8'){
+      // delete pressed and is empty, delete
+      destroyNote(el)
+      return false
+    }
+    
     if (shiftKey && keyCode == '9'){
       // Shift+Tab pressed, convert to sibling
       e.preventDefault()
@@ -105,7 +113,11 @@ $(function() {
   function updateNote(el) {
     $(el).parent().parent().find('.update_action').click()
   }
-
+  
+  function destroyNote(el) {
+    $(el).parent().parent().find('.destroy_action').click()
+  }
+  
   function moveDown(el) {
     var current_note = $(el).closest('.note').first();
     var next_note = current_note.next()
@@ -125,6 +137,7 @@ $(function() {
       current_note.parents('.note').first().find('.content').first().focus()
     }
   }
+
 
   function handleSearch(el) {
     var currentText = $(el).val()
