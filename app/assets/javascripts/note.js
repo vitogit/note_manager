@@ -143,7 +143,7 @@ $(function() {
     var currentText = $(el).val()
     $( ".note" ).each(function( index ) {
       var content = $(this).find('.content').text()
-      if (content && content.indexOf(currentText) >= 0) {
+      if (content && content.indexOf(currentText) >= 0 || currentText=="") {
         $(this).show()
         $(this).parents().show()
       } else {
