@@ -35,6 +35,31 @@ RSpec.describe Note, type: :model do
     expect(child2.parent_id).to equal(child1.id)
   end
 
+  context "delete" do
+    it "deletes the related tags" do
+      note1 = Note.create(text: "note1")
+      note1.tag_list.add("tag1")
+      note1.tag_list.add("tag2")
+      note1.save
+      note1.destroy
+
+      expect(ActsAsTaggableOn::Tag.all.size).to equal(0)
+    end  
+    
+    it "deletes the related tag if is not used by others" do
+      note1 = Note.create(text: "note1")
+      note2 = Note.create(text: "note2")
+      note1.tag_list.add("tag1")
+      note2.tag_list.add("tag1")
+      note1.save
+      note2.save
+      note1.destroy
+
+      expect(ActsAsTaggableOn::Tag.all.size).to equal(1)
+    end       
+  end
+
+  
   context "search_by_tag" do
     it "filter notes by a single tag" do
       note1 = Note.create(text: "n1")

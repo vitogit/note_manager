@@ -48,7 +48,6 @@ class NoteController < ApplicationController
   end
 
   def update
-    puts ("params________")+params.to_json
     if @note.update_attributes(note_params)
       # Handle a successful update.
     else
