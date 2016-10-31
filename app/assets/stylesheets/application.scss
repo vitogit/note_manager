@@ -3,5 +3,7 @@
 // Custom bootstrap variables must be set or imported before bootstrap itself.
 @import "bootstrap";
 @import "styles/_bootswatch";
+@import "jquery-ui/selectable";
+
 
 @import "note";

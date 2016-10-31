@@ -45,7 +45,7 @@
       <div class="search_bar form-group">
         <input id="searcher" type="text" class="form-control" placeholder="filter by tag">
       </div>
-      <div id="main_notes">
+      <div id="main_notes" class="selectable">
         <%= render :partial => "note_partial", :locals => { note: @root  } %>
       </div>
     </div>

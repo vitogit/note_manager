@@ -1,5 +1,6 @@
 $(function() {
-
+  //$( ".selectable" ).selectable();
+    
   $("#main").on('keydown', '.content',  function(event) {
     return handleKeyPress(event, this);
   })
