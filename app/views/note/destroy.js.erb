@@ -1,2 +1,3 @@
 var id = <%= @note.id %>
 $('#note_'+id).remove()
+$('#tag_list').load('/reload_tag_list'); //reload tag_list

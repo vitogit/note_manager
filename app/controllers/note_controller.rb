@@ -78,10 +78,8 @@ class NoteController < ApplicationController
 
    def init
      @root = Note.first
-     if @root.nil?
-       @root=  Note.create(text:'root')
-       @root.children.create(text:'')
-     end
+     @root=  Note.create(text:'root') if @root.nil?
+     @root.children.create(text:'start writing...') if @root.children.empty?
    end
    
   def is_integer? (number)
