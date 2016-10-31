@@ -3,7 +3,7 @@
   <div class="row note_line" style="display:<%='none' if note.parent.nil?%>">
     <div class="col-sm-6">
       <span class="bullet_point">•</span>
-      <span class=" content  <%='completed' if note.completed%>" contenteditable="true"><%= note.text %></span>
+      <span class=" content  <%='completed' if note.completed%>" spellcheck="false" contenteditable="true"><%= note.text %></span>
     </div>
     <div class="actions col-sm-6">
       <%= link_to 'Destroy', note, method: :delete, data: { confirm: 'Are you sure?' }, remote: true, class: 'destroy_action' %>

@@ -12,24 +12,12 @@
 
 .actions {
   display:none;
-  font-size: 10px;
+  font-size: 12px;
 }
 
-.note_line {
-  margin: 2px 0px;
-}
-
-.note_line .content {
-  box-shadow: none;
-}
-
-.bullet_point {
-  height: 30px;
-}
 .content {
   display: inline-block;
   width: 90%;
-  padding:1px;
   border: 1px solid transparent;
   border-radius: 4px;
   height: 25px;  
